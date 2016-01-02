@@ -1,0 +1,88 @@
+<div class="container">
+	<header>
+		<h1>Lime Player</h1>	
+		<button class="btn hamburg"><span class="ion-navicon"></span>
+			<ul>
+				<li>
+					<a>Podcasts</a>
+				</li>
+				<li>
+					<a>Radio</a>
+				</li>
+				<li>
+					<a>Search</a>
+				</li>
+				<li>
+					<a>Discover</a>
+				</li>
+			</ul>
+		</button>
+	</header>
+
+	<div class="middle-man">
+		{{#if loading}}
+			{{>loader}}
+		{{/if}}
+		{{#if podcast_data}}
+			{{#podcast_stations:i}}
+				{{>podcast_stations}}
+			{{/}}
+		{{/if}}
+		{{#if podcast_playlist_ready}}
+			{{#podcast_playlist:i}}
+				{{>podcast_playlist}}
+			{{/}}
+		{{/if}}
+	</div>
+
+	<div class="player">
+		<button class="btn btn-sm">
+			<span class="ion-ios-rewind"></span>
+		</button>	
+		<button class="btn btn-lg">
+			<span class="ion-ios-play"></span>
+		</button>
+		<button class="btn btn-sm">
+			<span class="ion-ios-fastforward"></span>
+		</button>
+
+		<div class="progress"></div>
+	</div>
+</div>
+
+{{#partial podcast_playlist}}
+	<div class="item-sm" on-click="play-podcast" data-index="{{i}}">
+		<div class="item-content">
+			<div class="pod-name">{{podcasts}}</div>
+			<div class="pod-time">{{}}</div>
+		</div>
+	</div>
+{{/partial}}
+
+{{#partial podcast_stations}}
+	<div class="item" on-click="get-pods" data-index="{{i}}">
+		<div class="item-content">
+			<div class="item-thumb" style="background:url('{{image}}'); background-size:cover;"></div>
+			<div class="content">
+				<h1>{{name}}</h1>
+			</div>
+		</div>
+	</div>
+{{/partial}}
+
+{{#partial loader}}
+	<div class="loading-container">
+		<div class='loading spin-1'>
+		  <div class='loading spin-2'>
+		    <div class='loading spin-3'>
+		      <div class='loading spin-4'>
+		        <div class='loading spin-5'>
+		          <div class='loading spin-6'></div>
+		        </div>
+		      </div>
+		    </div>
+		  </div>
+		</div>
+		<div>Loading streams</div>
+	</div>
+{{/partial}}

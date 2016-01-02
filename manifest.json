@@ -1,0 +1,27 @@
+{
+  "name": "Carbon X Player",
+  "short_name": "Carbon X",
+  "description": "Carbon Player a simple podcast listner for the web!!!",
+  "version": "1.0.0",
+  "manifest_version": 2,
+  "app": {
+    "background": {
+      "scripts": ["background.js"]
+    }
+  },
+  "icons": { "128": "icon-128.png", "512" : "icon-512.png" },
+  "permissions": [
+    "fileSystem",
+    "storage",
+    "notifications",
+    "https://trylime.com/*",
+    "http://trylime.com/*",
+    "https://*.twiiter.com/",
+    "https://*.facebook.com/",
+    "https://*.dropbox.com/",
+    "https://*.github.com/",
+    "https://*.cdnjs.cloudflare.com/",
+    "app.window.alpha",
+    "app.window.shape"
+  ]
+}
