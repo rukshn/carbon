@@ -169,17 +169,54 @@ header{
 
 .item-sm{
 	padding: 0px 10px 0px 10px;
-	height: 25px;
+	height: 40px;
 	display: flex;
 	flex-direction: row;
 	.pod-name{
-		width: 70%;
+		width: 80%;
 	}	
 	.pod-time{
-		margin-left: auto;
 		color: $divider;
+		width: 15%;
+	}
+	.item-content{
+		flex: 1;
+		display: flex;
+		justify-content: flex-start;
+		align-items: center;
+	}
+	.pod-description{
+		white-space: nowrap;
+    	overflow: hidden;
+    	text-overflow: ellipsis;    
+
+    	min-width: 0;
 	}
 }
+
+.station-details{
+	display: flex;
+	height: 200px;
+	background: $divider;
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: center;
+	.skrym{
+		flex: 1;
+		background: rgba(0,0,0,0.5);
+		color: $white;
+		justify-content: center;
+		align-items: center;
+		display: flex;
+		flex-direction: column;
+		padding: 20px;
+	}
+	h1{
+		font-weight: 600;
+	}
+}
+
+// Loader
 
 .loading-container{
 	display: flex;
@@ -261,3 +298,4 @@ header{
   height: 20px; 
   animation-delay: 1s;
 }
+

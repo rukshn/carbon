@@ -38,6 +38,11 @@ $.get('../html/templates/home.html').done(function(data){
 				App.set('podcast_playlist', podcast_trim)
 				App.set('loading', false)
 				App.set('podcast_playlist_ready', true)
+				var station_details= new Array()
+				station_details['title'] = data.title
+				station_details['description'] = data.description
+				station_details['image'] = data.image 
+				App.set('station_details', station_details)
 			})
 		}
 	})

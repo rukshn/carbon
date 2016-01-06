@@ -141,14 +141,43 @@ header {
 
 .item-sm {
   padding: 0px 10px 0px 10px;
-  height: 25px;
+  height: 40px;
   display: flex;
   flex-direction: row; }
   .item-sm .pod-name {
-    width: 70%; }
+    width: 80%; }
   .item-sm .pod-time {
-    margin-left: auto;
-    color: rgba(0, 0, 0, 0.12); }
+    color: rgba(0, 0, 0, 0.12);
+    width: 15%; }
+  .item-sm .item-content {
+    flex: 1;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center; }
+  .item-sm .pod-description {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    min-width: 0; }
+
+.station-details {
+  display: flex;
+  height: 200px;
+  background: rgba(0, 0, 0, 0.12);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center; }
+  .station-details .skrym {
+    flex: 1;
+    background: rgba(0, 0, 0, 0.5);
+    color: #fff;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    padding: 20px; }
+  .station-details h1 {
+    font-weight: 600; }
 
 .loading-container {
   display: flex;

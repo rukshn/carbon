@@ -29,6 +29,12 @@
 			{{/}}
 		{{/if}}
 		{{#if podcast_playlist_ready}}
+			<div class="station-details" style="background-image:url('{{station_details.image}}');">
+				<div class="skrym">
+					<h1>{{station_details.title}}</h1>
+					<p class="pod-description">{{station_details.description}}</p>
+				</div>
+			</div>
 			{{#podcast_playlist:i}}
 				{{>podcast_playlist}}
 			{{/}}
@@ -53,8 +59,8 @@
 {{#partial podcast_playlist}}
 	<div class="item-sm" on-click="play-podcast" data-index="{{i}}">
 		<div class="item-content">
-			<div class="pod-name">{{podcasts}}</div>
-			<div class="pod-time">{{}}</div>
+			<div class="pod-name">{{title}}</div>
+			<div class="pod-time">{{duration}}</div>
 		</div>
 	</div>
 {{/partial}}
