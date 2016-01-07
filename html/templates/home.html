@@ -35,9 +35,11 @@
 					<p class="pod-description">{{station_details.description}}</p>
 				</div>
 			</div>
+			<div class="thin" id="playlist-item-parent" on-mouseover="scrollbar">
 			{{#podcast_playlist:i}}
 				{{>podcast_playlist}}
 			{{/}}
+			</div>
 		{{/if}}
 	</div>
 

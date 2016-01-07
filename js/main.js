@@ -40,11 +40,16 @@ $.get('../html/templates/home.html').done(function(data){
 				App.set('podcast_playlist_ready', true)
 				var station_details= new Array()
 				station_details['title'] = data.title
-				station_details['description'] = data.description
+				if (data.description.length > 150) {
+					station_details['description'] = data.description.substring(0,149) + "..."
+				}
+				else
+				{
+					station_details['description'] = data.description
+				}
 				station_details['image'] = data.image 
 				App.set('station_details', station_details)
 			})
 		}
 	})
-
 })

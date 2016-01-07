@@ -3,7 +3,6 @@
 
 *, *:before, *:after
 {
-	-moz-box-sizing: border-box;
 	-webkit-box-sizing: border-box;
 	box-sizing: border-box;
 }
@@ -12,7 +11,6 @@ body, html{
 	margin: 0;
 	padding: 0;
 	-webkit-font-smoothing: antialiased;
-	-moz-osx-font-smoothing: grayscale;
 	font-family: 'open-sans-regular';
 	text-shadow: 1px 1px 1px rgba(0,0,0,0.004);
 	height: 100%;
@@ -88,7 +86,7 @@ header{
 	}
 }
 .middle-man{
-	flex-grow:1;
+	flex:1;
 	display: flex;
 	flex-direction: column;
 }
@@ -176,7 +174,7 @@ header{
 		width: 80%;
 	}	
 	.pod-time{
-		color: $divider;
+		color: rgba(0,0,0,0.5);
 		width: 15%;
 	}
 	.item-content{
@@ -184,13 +182,6 @@ header{
 		display: flex;
 		justify-content: flex-start;
 		align-items: center;
-	}
-	.pod-description{
-		white-space: nowrap;
-    	overflow: hidden;
-    	text-overflow: ellipsis;    
-
-    	min-width: 0;
 	}
 }
 
@@ -210,10 +201,15 @@ header{
 		display: flex;
 		flex-direction: column;
 		padding: 20px;
+		
 	}
 	h1{
 		font-weight: 600;
 	}
+}
+
+#playlist-item-parent{
+	overflow: auto;
 }
 
 // Loader
@@ -299,3 +295,21 @@ header{
   animation-delay: 1s;
 }
 
+// Scrollbars
+
+::-webkit-scrollbar {
+	width: 8px;
+}
+
+::-webkit-scrollbar-track {
+	background: white;
+}
+
+::-webkit-scrollbar-thumb {
+	transition: all 0.3s ease;
+	background: rgba(0,0,0,0.1);
+}
+
+::-webkit-scrollbar-thumb:hover {
+	background: rgba(0,0,0,0.4);
+}
