@@ -170,8 +170,11 @@ header{
 	height: 40px;
 	display: flex;
 	flex-direction: row;
+	cursor: pointer;
+	transition: all 0.2s ease;
 	.pod-name{
-		width: 80%;
+		width: 85%;
+		padding-right: 7px;
 	}	
 	.pod-time{
 		color: rgba(0,0,0,0.5);
@@ -183,7 +186,12 @@ header{
 		justify-content: flex-start;
 		align-items: center;
 	}
+
+&:hover{
+	background: lighten($accent, 20%);
 }
+}
+
 
 .station-details{
 	display: flex;

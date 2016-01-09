@@ -14,7 +14,7 @@ $.get('../html/templates/home.html').done(function(data){
 			podcast_station_title: null,
 			loading: true,
 			podcast_playlist_rady: false,
-
+			station_details: null,
 		}
 	})
 
@@ -26,6 +26,23 @@ $.get('../html/templates/home.html').done(function(data){
 		})
 	}
 
+	App.on('play-podcast', function(event){
+		var index = event.node.getAttribute( 'data-index' )
+		if (App.get('station_details') != null) {
+			var current_playing_station = App.get('station_details')
+		}
+		var icon = current_playing_station['image']
+		var title = current_playing_station['title']
+
+		var playing_podcast = App.get('podcast_playlist')
+		playing_podcast = playing_podcast[index]
+
+		var podcast_link = playing_podcast.podlink
+		var podcast_name = playing_podcast.title
+
+		notifyMe(title, icon, podcast_name)
+	})
+
 	App.on('get-pods', function(event){
 		var index = event.node.getAttribute( 'data-index' )
 		App.set('loading', true)
@@ -34,7 +51,8 @@ $.get('../html/templates/home.html').done(function(data){
 			var pod_stations = App.get('podcast_stations')
 			var clicked_podcast = pod_stations[index].url
 			$.get(API + 'feed', {feed: clicked_podcast}).done(function(data){
-				var podcast_trim = data.podcasts.slice(0,10);
+				var podcast_trim = data.podcasts.slice(0,10)
+				console.log(podcast_trim)
 				App.set('podcast_playlist', podcast_trim)
 				App.set('loading', false)
 				App.set('podcast_playlist_ready', true)
@@ -52,4 +70,28 @@ $.get('../html/templates/home.html').done(function(data){
 			})
 		}
 	})
+
+	function notifyMe(title,icon,message) {
+		var icon = icon
+		var message = message
+		var title = title
+		if (!Notification) {
+	    	console.log('notification not enabled')
+	    	return
+	  	}
+
+	  if (Notification.permission !== "granted")
+	    Notification.requestPermission()
+	  else {
+	    var notification = new Notification(title, {
+	      icon: icon,
+	      body: message,
+	    })
+		setTimeout(notification.close.bind(notification), 4000)
+
+	    // notification.onclick = function () {
+	    
+	    // }
+	  }
+	}
 })
