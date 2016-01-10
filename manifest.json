@@ -1,7 +1,7 @@
 {
-  "name": "Carbon X Player",
-  "short_name": "Carbon X",
-  "description": "Carbon Player a simple podcast listner for the web!!!",
+  "name": "Lime Player",
+  "short_name": "Lime",
+  "description": "Lime Player is a simple podcast listner for the web!!!",
   "version": "1.0.0",
   "manifest_version": 2,
   "app": {
