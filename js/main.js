@@ -16,6 +16,7 @@ $.get('../html/templates/home.html').done(function(data){
 			podcast_playlist_rady: false,
 			station_details: null,
 			now_playing_media: null,
+			playing_index: null,
 		}
 	})
 
@@ -43,22 +44,45 @@ $.get('../html/templates/home.html').done(function(data){
 
 		notifyMe(title, icon, podcast_name)
 
+		App.set('playing_index', index)
 		App.set('now_playing_media', podcast_link)
 		var player = document.getElementById('now_playing')
 		player.play()
 
-		if(player.onProgress){
-			var start_time = player.seekable.start(0);  // Returns the starting time (in seconds)
-			var end_time = player.seekable.end(0);    // Returns the ending time (in seconds)
-			// player.currentTime = 122; // Seek to 122 seconds
-			var played_time = player.played.end(0);      // Returns the number of seconds the browser has played
+		// if(player.onProgress){
+		// 	var start_time = player.seekable.start(0);  // Returns the starting time (in seconds)
+		// 	var end_time = player.seekable.end(0);    // Returns the ending time (in seconds)
+		// 	// player.currentTime = 122; // Seek to 122 seconds
+		// 	var played_time = player.played.end(0);      // Returns the number of seconds the browser has played
 
-			console.log(end_time)
-			console.log(start_time)
-			console.log(played_time)	
-		}
+		// 	console.log(end_time)
+		// 	console.log(start_time)
+		// 	console.log(played_time)	
+		// }
 		
 	})
+
+	App.on('time_update', function(event){
+		var playing_index = App.get('playing_index')
+		var player = document.getElementById('now_playing')
+		var total_time = player.duration
+		var played_time = player.played.end(0)
+
+		var parent_container = document.getElementById('playlist-item-parent')
+
+		var playlist_items = parent_container.getElementsByClassName('item-sm');
+		var playlist_item = playlist_items[playing_index]		
+		var played_precentage = (played_time/total_time)*100
+
+		played_precentage = played_precentage.toFixed(2)
+		var remaining_precentage = 100 - played_precentage
+	 	var background_color =  'linear-gradient(90deg, rgba(37, 211, 102, 0.5) ' + played_precentage + '%, #fff ' + played_precentage +'%)'
+		playlist_item.style.border-top = '1px solid rgba(37, 211, 102, 0.5)'
+		playlist_item.style.border-bottom = '1px solid rgba(37, 211, 102, 0.5)'
+
+		playlist_item.style.background = background_color
+
+	})	
 
 	App.on('get-pods', function(event){
 		var index = event.node.getAttribute( 'data-index' )
