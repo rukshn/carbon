@@ -15,6 +15,7 @@ $.get('../html/templates/home.html').done(function(data){
 			loading: true,
 			podcast_playlist_rady: false,
 			station_details: null,
+			now_playing_media: null,
 		}
 	})
 
@@ -41,6 +42,22 @@ $.get('../html/templates/home.html').done(function(data){
 		var podcast_name = playing_podcast.title
 
 		notifyMe(title, icon, podcast_name)
+
+		App.set('now_playing_media', podcast_link)
+		var player = document.getElementById('now_playing')
+		player.play()
+
+		if(player.onProgress){
+			var start_time = player.seekable.start(0);  // Returns the starting time (in seconds)
+			var end_time = player.seekable.end(0);    // Returns the ending time (in seconds)
+			// player.currentTime = 122; // Seek to 122 seconds
+			var played_time = player.played.end(0);      // Returns the number of seconds the browser has played
+
+			console.log(end_time)
+			console.log(start_time)
+			console.log(played_time)	
+		}
+		
 	})
 
 	App.on('get-pods', function(event){

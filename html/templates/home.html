@@ -94,3 +94,8 @@
 		<div>Loading streams</div>
 	</div>
 {{/partial}}
+
+<!-- Audio Player -->
+<audio id="now_playing" src="{{now_playing_media}}" on-ended="track_ended" on-timeupdate="time_update">
+	<p>Your browser does not support the <code>audio</code> element.</p>
+</audio>
