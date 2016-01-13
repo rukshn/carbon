@@ -77,8 +77,7 @@ $.get('../html/templates/home.html').done(function(data){
 		played_precentage = played_precentage.toFixed(2)
 		var remaining_precentage = 100 - played_precentage
 	 	var background_color =  'linear-gradient(90deg, rgba(37, 211, 102, 0.5) ' + played_precentage + '%, #fff ' + played_precentage +'%)'
-		playlist_item.style.border-top = '1px solid rgba(37, 211, 102, 0.5)'
-		playlist_item.style.border-bottom = '1px solid rgba(37, 211, 102, 0.5)'
+
 
 		playlist_item.style.background = background_color
 
