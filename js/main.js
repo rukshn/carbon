@@ -17,6 +17,9 @@ $.get('../html/templates/home.html').done(function(data){
 			station_details: null,
 			now_playing_media: null,
 			playing_index: null,
+			radio_data: false,
+			radio_stations: null,
+			isplaying: false,
 		}
 	})
 
@@ -57,31 +60,95 @@ $.get('../html/templates/home.html').done(function(data){
 
 		// 	console.log(end_time)
 		// 	console.log(start_time)
-		// 	console.log(played_time)	
+		// 	console.log(played_time)
 		// }
-		
+
 	})
 
 	App.on('time_update', function(event){
-		var playing_index = App.get('playing_index')
+		if(App.get('podcast_playlist_ready') === true)
+		{
+			var playing_index = App.get('playing_index')
+			var player = document.getElementById('now_playing')
+			var total_time = player.duration
+			var played_time = player.played.end(0)
+
+			var parent_container = document.getElementById('playlist-item-parent')
+
+			var playlist_items = parent_container.getElementsByClassName('item-sm');
+			var playlist_item = playlist_items[playing_index]
+			var played_precentage = (played_time/total_time)*100
+
+			played_precentage = played_precentage.toFixed(2)
+			var remaining_precentage = 100 - played_precentage
+		 	var background_color =  'linear-gradient(90deg, rgba(37, 211, 102, 0.5) ' + played_precentage + '%, #fff ' + played_precentage +'%)'
+
+
+			playlist_item.style.background = background_color
+		}
+
+	})
+
+	App.on('get-radio', function(event){
+		App.set('podcast_data', false)
+		if (App.get('radio_stations') === null) {
+			App.set('loading', true)
+			$.get(API + 'radio').done(function(data){
+				App.set('radio_stations', data)
+				App.set('loading', false)
+				App.set('radio_data', true)
+			})
+		}
+		else{
+			App.set('radio_data', true)
+		}
+	})
+
+	App.on('play-radio', function(event){
+		var index = event.node.getAttribute('data-index')
+		var radio_stations = App.get('radio_stations')
+		var streaming_link = radio_stations[index].meta.streaming_link
+		var radio_name = radio_stations[index].meta.name
+		var radio_icon = radio_stations[index].meta.image
 		var player = document.getElementById('now_playing')
-		var total_time = player.duration
-		var played_time = player.played.end(0)
 
-		var parent_container = document.getElementById('playlist-item-parent')
+		if (App.get('isplaying') === true) {
+			player.pause()
+			App.set('isplaying', false)
+			notifyMe('Station Paused', radio_icon, radio_name)
+		}
+		else {
+			if(streaming_link.indexOf('.mp3') >= 0 || streaming_link.indexOf('.ogg') >= 0){
+				var streaming_link = streaming_link
+				App.set('now_playing_media', streaming_link)
+				player.play()
+				App.set('isplaying', true)
+			}
+			else{
+				var streaming_link = streaming_link + ";.mp3"
+				App.set('now_playing_media', streaming_link)
+				player.play()
+				App.set('isplaying', true)
+			}
+			notifyMe('Now Playing Radio' , radio_icon, radio_name)
+		}
 
-		var playlist_items = parent_container.getElementsByClassName('item-sm');
-		var playlist_item = playlist_items[playing_index]		
-		var played_precentage = (played_time/total_time)*100
 
-		played_precentage = played_precentage.toFixed(2)
-		var remaining_precentage = 100 - played_precentage
-	 	var background_color =  'linear-gradient(90deg, rgba(37, 211, 102, 0.5) ' + played_precentage + '%, #fff ' + played_precentage +'%)'
+	})
 
-
-		playlist_item.style.background = background_color
-
-	})	
+	App.on('play-button', function(event){
+			var player = document.getElementById('now_playing')
+			if (App.get('now_playing_media') != null) {
+				if (App.get('isplaying') === true) {
+					App.set('isplaying', false)
+					player.pause()
+				}
+				else {
+					App.set('isplaying', true)
+					player.play()
+				}
+			}
+	})
 
 	App.on('get-pods', function(event){
 		var index = event.node.getAttribute( 'data-index' )
@@ -105,7 +172,7 @@ $.get('../html/templates/home.html').done(function(data){
 				{
 					station_details['description'] = data.description
 				}
-				station_details['image'] = data.image 
+				station_details['image'] = data.image
 				App.set('station_details', station_details)
 			})
 		}
@@ -130,7 +197,7 @@ $.get('../html/templates/home.html').done(function(data){
 		setTimeout(notification.close.bind(notification), 4000)
 
 	    // notification.onclick = function () {
-	    
+
 	    // }
 	  }
 	}

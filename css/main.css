@@ -79,11 +79,12 @@ header {
 .middle-man {
   flex: 1;
   display: flex;
-  flex-direction: column; }
+  flex-direction: column;
+  overflow-y: auto; }
 
 .player {
   display: flex;
-  background: #f4f4f5;
+  background: #eaeaea;
   height: 60px;
   border-top: 1px solid rgba(0, 0, 0, 0.12);
   align-items: center;

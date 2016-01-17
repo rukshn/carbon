@@ -1,12 +1,12 @@
 <div class="container">
 	<header>
-		<h1>Lime Player</h1>	
+		<h1>Lime Player</h1>
 		<button class="btn hamburg"><span class="ion-navicon"></span>
 			<ul>
 				<li>
 					<a>Podcasts</a>
 				</li>
-				<li>
+				<li on-click="get-radio">
 					<a>Radio</a>
 				</li>
 				<li>
@@ -28,6 +28,11 @@
 				{{>podcast_stations}}
 			{{/}}
 		{{/if}}
+		{{#if radio_data}}
+			{{#radio_stations:i}}
+				{{>radio_stations}}
+			{{/}}
+		{{/if}}
 		{{#if podcast_playlist_ready}}
 			<div class="station-details" style="background-image:url('{{station_details.image}}');">
 				<div class="skrym">
@@ -46,9 +51,13 @@
 	<div class="player">
 		<button class="btn btn-sm">
 			<span class="ion-ios-rewind"></span>
-		</button>	
-		<button class="btn btn-lg">
-			<span class="ion-ios-play"></span>
+		</button>
+		<button class="btn btn-lg" on-click="play-button">
+			{{#if isplaying}}
+				<span class="ion-ios-pause"></span>
+			{{else}}
+				<span class="ion-ios-play"></span>
+			{{/if}}
 		</button>
 		<button class="btn btn-sm">
 			<span class="ion-ios-fastforward"></span>
@@ -77,6 +86,18 @@
 		</div>
 	</div>
 {{/partial}}
+
+{{#partial radio_stations}}
+	<div class="item" on-click="play-radio" data-index="{{i}}">
+		<div class="item-content">
+			<div class="item-thumb" style="background:url('{{meta.image}}'); background-size:cover;"></div>
+			<div class="content">
+				<h1>{{meta.name}}</h1>
+			</div>
+		</div>
+	</div>
+{{/partial}}
+
 
 {{#partial loader}}
 	<div class="loading-container">
