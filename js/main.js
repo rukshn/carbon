@@ -33,24 +33,7 @@ $.get('../html/templates/home.html').done(function(data){
 
 	App.on('play-podcast', function(event){
 		var index = event.node.getAttribute( 'data-index' )
-		if (App.get('station_details') != null) {
-			var current_playing_station = App.get('station_details')
-		}
-		var icon = current_playing_station['image']
-		var title = current_playing_station['title']
-
-		var playing_podcast = App.get('podcast_playlist')
-		playing_podcast = playing_podcast[index]
-
-		var podcast_link = playing_podcast.podlink
-		var podcast_name = playing_podcast.title
-
-		notifyMe(title, icon, podcast_name)
-
-		App.set('playing_index', index)
-		App.set('now_playing_media', podcast_link)
-		var player = document.getElementById('now_playing')
-		player.play()
+		play_podcast(index)
 
 		// if(player.onProgress){
 		// 	var start_time = player.seekable.start(0);  // Returns the starting time (in seconds)
@@ -63,6 +46,33 @@ $.get('../html/templates/home.html').done(function(data){
 		// 	console.log(played_time)
 		// }
 
+	})
+
+	App.on('play-button', function(event){
+			var player = document.getElementById('now_playing')
+			if (App.get('now_playing_media') != null) {
+				if (App.get('isplaying') === true) {
+					App.set('isplaying', false)
+					player.pause()
+				}
+				else {
+					App.set('isplaying', true)
+					player.play()
+				}
+			}
+	})
+
+	App.on('next-track', function(event){
+		var index = event.node.getAttribute('data-index')
+		index = index + 1
+		play_podcast(index)
+	})
+
+
+	App.on('prev-track', function(event){
+		var index = event.node.getAttribute('data-index')
+		index = index - 1
+		play_podcast(index)
 	})
 
 	App.on('time_update', function(event){
@@ -136,19 +146,6 @@ $.get('../html/templates/home.html').done(function(data){
 
 	})
 
-	App.on('play-button', function(event){
-			var player = document.getElementById('now_playing')
-			if (App.get('now_playing_media') != null) {
-				if (App.get('isplaying') === true) {
-					App.set('isplaying', false)
-					player.pause()
-				}
-				else {
-					App.set('isplaying', true)
-					player.play()
-				}
-			}
-	})
 
 	App.on('get-pods', function(event){
 		var index = event.node.getAttribute( 'data-index' )
@@ -200,5 +197,30 @@ $.get('../html/templates/home.html').done(function(data){
 
 	    // }
 	  }
+	}
+
+	function play_podcast(index){
+		if (App.get('station_details') != null) {
+			var current_playing_station = App.get('station_details')
+		}
+		var icon = current_playing_station['image']
+		var title = current_playing_station['title']
+
+		var playing_podcast = App.get('podcast_playlist')
+		if (playing_podcast != null) {
+			playing_podcast = playing_podcast[index]
+			if (playing_podcast != null || playing_podcast != undifined) {
+				var podcast_link = playing_podcast.podlink
+				var podcast_name = playing_podcast.title
+
+				notifyMe(title, icon, podcast_name)
+
+				App.set('playing_index', index)
+				App.set('now_playing_media', podcast_link)
+				var player = document.getElementById('now_playing')
+				player.play()
+			}
+
+		}
 	}
 })

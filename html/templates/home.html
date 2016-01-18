@@ -49,7 +49,7 @@
 	</div>
 
 	<div class="player">
-		<button class="btn btn-sm">
+		<button class="btn btn-sm" on-click="prev-track" data-index="playing_index">
 			<span class="ion-ios-rewind"></span>
 		</button>
 		<button class="btn btn-lg" on-click="play-button">
@@ -59,7 +59,7 @@
 				<span class="ion-ios-play"></span>
 			{{/if}}
 		</button>
-		<button class="btn btn-sm">
+		<button class="btn btn-sm" on-click="next-track" data-index="playing_index">
 			<span class="ion-ios-fastforward"></span>
 		</button>
 

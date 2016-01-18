@@ -2,7 +2,7 @@
   "name": "Lime Player",
   "short_name": "Lime",
   "description": "Lime Player is a simple podcast listner for the web!!!",
-  "version": "0.2.0",
+  "version": "0.2.3",
   "manifest_version": 2,
   "app": {
     "background": {
