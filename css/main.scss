@@ -38,7 +38,7 @@ header{
 	align-items: center;
 	padding-left: 20px;
 	padding-right: 20px;
-	
+
 	h1{
 		color: $white;
 		font-size: 16px;
@@ -50,7 +50,7 @@ header{
 		color: $white;
 		font-size: 24px;
 		-webkit-app-region: no-drag;
-  		
+
   		ul {
 		    position: absolute;
 		    right: 1em;
@@ -108,7 +108,7 @@ header{
 	}
 
 	.btn-lg{
-		font-size: 40px;	
+		font-size: 40px;
 	}
 	.btn-sm{
 		font-size: 24px;
@@ -176,7 +176,7 @@ header{
 	.pod-name{
 		width: 85%;
 		padding-right: 7px;
-	}	
+	}
 	.pod-time{
 		color: rgba(0,0,0,0.5);
 		width: 15%;
@@ -210,7 +210,7 @@ header{
 		display: flex;
 		flex-direction: column;
 		padding: 20px;
-		
+
 	}
 	h1{
 		font-weight: 600;
@@ -251,7 +251,7 @@ header{
 }
 
 
-.loading { 
+.loading {
   background-color: transparent;
   border-radius: 50%;
   margin: 5px auto;
@@ -263,7 +263,7 @@ header{
   border-top: 5px solid transparent;
   border-left: 5px solid transparent;
   width: 120px;
-  height: 120px; 
+  height: 120px;
 }
 .spin-2{
   border: 5px solid #05bbc3 ;
@@ -278,7 +278,7 @@ header{
   border-top: 5px solid transparent;
   border-left: 5px solid transparent;
   width: 80px;
-  height: 80px; 
+  height: 80px;
   animation-delay: 1s;
 }
 .spin-4{
@@ -286,7 +286,7 @@ header{
   border-top: 5px solid transparent;
   border-left: 5px solid transparent;
   width: 60px;
-  height: 60px; 
+  height: 60px;
   animation-delay: 1s;
 }
 .spin-5{
@@ -294,13 +294,13 @@ header{
   border-top: 5px solid transparent;
   border-left: 5px solid transparent;
   width: 40px;
-  height: 40px; 
+  height: 40px;
   animation-delay: 1s;
 }
 .spin-6{
   border: 5px solid #fff ;
   width: 20px;
-  height: 20px; 
+  height: 20px;
   animation-delay: 1s;
 }
 

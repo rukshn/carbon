@@ -13,7 +13,7 @@ $.get('../html/templates/home.html').done(function(data){
 			podcast_playlist: null,
 			podcast_station_title: null,
 			loading: true,
-			podcast_playlist_rady: false,
+			podcast_playlist_ready: false,
 			station_details: null,
 			now_playing_media: null,
 			playing_index: null,
@@ -101,6 +101,7 @@ $.get('../html/templates/home.html').done(function(data){
 
 	App.on('get-radio', function(event){
 		App.set('podcast_data', false)
+		App.set('podcast_playlist_ready', false)
 		if (App.get('radio_stations') === null) {
 			App.set('loading', true)
 			$.get(API + 'radio').done(function(data){
@@ -146,6 +147,11 @@ $.get('../html/templates/home.html').done(function(data){
 
 	})
 
+	App.on('get-podcasts', function(event){
+		App.set('radio_data', false)
+		App.set('podcast_data', true)
+		App.set('podcast_playlist_ready', false)
+	})
 
 	App.on('get-pods', function(event){
 		var index = event.node.getAttribute( 'data-index' )
